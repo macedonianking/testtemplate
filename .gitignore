@@ -3,3 +3,4 @@ out
 main
 Makefile
 *.Makefile
+main.*
