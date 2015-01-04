@@ -15,8 +15,15 @@
 		{
 			'target_name': 'main',
 			'type': 'executable',
+			'include_dirs': [
+				'.',
+			],
 			'sources': [
 				'src/main.cpp',
+				'src/test.cpp',
+				'src/test.h',
+				'src/stack.cpp',
+				'src/stack.h',
 			],
 			'cflags': [
 				'-Wall',

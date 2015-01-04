@@ -1,13 +1,8 @@
-#include <stdio.h>
-#include <stddef.h>
-#include <stdlib.h>
-
-#include <iostream>
-#include <string>
+#include "src/test.h"
 
 #include "src/stack.h"
 
-int main(int argc, char **argv)
+void doTest()
 {
 	Stack<int> intStack;
 	Stack<std::string> textStack;
@@ -17,6 +12,4 @@ int main(int argc, char **argv)
 
 	textStack.push("Hello world");
 	textStack.pop();
-
-	return EXIT_SUCCESS;
 }
