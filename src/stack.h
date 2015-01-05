@@ -5,7 +5,7 @@
 #include <string>
 #include <stdexcept>
 
-template<typename T>
+template<typename T, typename TContainer = std::vector<T>>
 class Stack
 {
 public:
@@ -13,7 +13,7 @@ public:
 	{
 
 	}
-	Stack(const Stack<T> &item)
+	Stack(const Stack<T, TContainer> &item)
 	{
 		this->mElements = item.mElements;
 	}
@@ -23,9 +23,30 @@ public:
 
 	}
 
-	Stack<T> &operator=(const Stack<T> rhs)
+	Stack<T> &operator=(const Stack<T, TContainer> &rhs)
 	{
-		this->mElements = rhs.mElements;
+		if (this != &rhs) {
+			this->mElements = rhs.mElements;
+		}
+		return *this;
+	}
+
+	template<typename U, typename UContainer>
+	Stack<T, TContainer> &operator=(const Stack<U, UContainer> &rhs)
+	{
+		if ((void*)this == (void*)&rhs)
+		{
+			return *this;
+		}
+
+		Stack<U, UContainer> tmp(rhs);
+		this->mElements.clear();
+		while (!tmp.empty())
+		{
+			mElements.push_front(tmp.top());
+			tmp.pop();
+		}
+
 		return *this;
 	}
 
@@ -60,11 +81,11 @@ public:
 	}
 
 private:
-	std::vector<T> mElements;
+	TContainer mElements;
 };
 
-template<typename T>
-void Stack<T>::pop()
+template<typename T, typename TContainer>
+void Stack<T, TContainer>::pop()
 {
 	if (mElements.empty())
 	{
