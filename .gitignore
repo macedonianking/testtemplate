@@ -1,6 +1,8 @@
-out
-*.mk
-main
-Makefile
-*.Makefile
-main.*
+.ninja_deps
+.ninja_log
+*.db
+*.db-wal
+*.sublime-workspace
+.vscode
+*.exe
+/out

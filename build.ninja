@@ -1,0 +1,46 @@
+cxx = g++
+cincludes = -Isrc
+cflags = -Wall -c -std=c++0x -g ${cincludes}
+ldflags = 
+
+source_files = src/main.c
+outdir = build
+
+rule cc 
+  depfile = $out.d
+  deps = gcc
+  command = $cxx -MMD -MF $out.d $cflags -o $out $in
+  description = CXX $in
+
+rule ccs
+  command = $cxx -c $cflags -o $out $in
+  description = CXX $in
+
+rule link
+  command = $cxx -o $out $in $ldflags
+  description = LINK $out
+
+build $outdir/main.o: cc src/main.cpp
+build $outdir/string_ext.o: cc src/string_ext.cpp
+build $outdir/chapter1/chapter1.o: cc src/chapter1/chapter1.cpp
+build $outdir/chapter2/chapter2.o: cc src/chapter2/chapter2.cpp
+build $outdir/chapter3/chapter3_2.o: cc src/chapter3/chapter3_2.cpp
+build $outdir/chapter3/chapter3_3.o: cc src/chapter3/chapter3_3.cpp
+build $outdir/chapter3/chapter3_4.o: cc src/chapter3/chapter3_4.cpp
+build $outdir/chapter12/chapter12.o: cc src/chapter12/chapter12.cpp
+build $outdir/chapter15/chapter15.o: cc src/chapter15/chapter15.cpp
+
+build main.exe: link $
+  $outdir/string_ext.o $
+  $outdir/chapter1/chapter1.o $
+  $outdir/chapter2/chapter2.o $
+  $outdir/chapter3/chapter3_2.o $
+  $outdir/chapter3/chapter3_3.o $
+  $outdir/chapter3/chapter3_4.o $
+  $outdir/chapter12/chapter12.o $
+  $outdir/chapter15/chapter15.o $
+  $outdir/main.o
+
+build all: phony main.exe
+
+default all

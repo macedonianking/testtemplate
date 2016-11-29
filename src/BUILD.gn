@@ -1,0 +1,28 @@
+
+executable("main") {
+  sources = [
+    "file.txt",
+    "list.h",
+    "macros.h",
+    "main.cpp",
+    "string_ext.cpp",
+    "string_ext.h",
+    "util.h",
+    "chapter1/chapter1.cpp",
+    "chapter1/chapter1.h",
+    "chapter2/chapter2.cpp",
+    "chapter2/chapter2.h",
+    "chapter3/chapter3_2.cpp",
+    "chapter3/chapter3_2.h",
+    "chapter3/chapter3_3.cpp",
+    "chapter3/chapter3_3.h",
+    "chapter3/chapter3_4.cpp",
+    "chapter3/chapter3_4.h",
+    "chapter12/chapter12.cpp",
+    "chapter12/chapter12.h",
+    "chapter15/chapter15.cpp",
+    "chapter15/chapter15.h",
+  ]
+  include_dirs = ["."]
+  cflags = [ "-std=c++0x", "-g" ]
+}
