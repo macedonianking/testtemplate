@@ -20,6 +20,8 @@ executable("main") {
     "chapter3/chapter3_4.h",
     "chapter12/chapter12.cpp",
     "chapter12/chapter12.h",
+    "chapter12/chapter12_1.cpp",
+    "chapter12/chapter12_1.h",
     "chapter15/chapter15.cpp",
     "chapter15/chapter15.h",
   ]
