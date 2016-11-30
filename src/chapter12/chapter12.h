@@ -13,7 +13,7 @@ private:
 	double 		mRevenue;
 
 public:
-	SalesItem(const std::string &isbn)
+	explicit SalesItem(const std::string &isbn = "")
 	: mISBN(isbn),
 	  mCount(0),
 	  mRevenue(0.0) {
@@ -24,6 +24,8 @@ public:
 	  mCount(count),
 	  mRevenue(revenue) {
 	}
+
+	explicit SalesItem(std::istream &in);
 
 	void UpdateCountAndRevenue(int count, double revenue) {
 		mCount = count;

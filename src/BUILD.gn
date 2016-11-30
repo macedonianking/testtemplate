@@ -22,6 +22,8 @@ executable("main") {
     "chapter12/chapter12.h",
     "chapter12/chapter12_1.cpp",
     "chapter12/chapter12_1.h",
+    "chapter12/SkBitmap.cpp",
+    "chapter12/SkBitmap.h",
     "chapter15/chapter15.cpp",
     "chapter15/chapter15.h",
   ]

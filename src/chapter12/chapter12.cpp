@@ -10,6 +10,8 @@ double SalesItem::Average() const {
     }
 }
 
-
+SalesItem::SalesItem(std::istream &in) {
+    in >> mISBN >> mRevenue >> mCount;
+}
 
 }
