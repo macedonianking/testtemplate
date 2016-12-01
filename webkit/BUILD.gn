@@ -1,0 +1,15 @@
+
+config("webkit_config") {
+  include_dirs = [ "source" ]
+}
+
+static_library("webkit_static") {
+  sources = [
+    "source/Config.h",
+    "source/wtf/RawPtr.h",
+    "source/WebKitTest.cpp",
+  ]
+  public_configs = [ 
+    ":webkit_config", 
+  ]
+}
