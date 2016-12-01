@@ -14,7 +14,12 @@ config("default_config") {
   } else {
     assert(false, "Not supported platform")
   }
-  cflags = [ "-Wall", "-Werror=implicit-function-declaration" ]
+  cflags = [ 
+    "-Wall", 
+    "-Werror=implicit-function-declaration",
+    "-g",
+    "-std=c++0x", 
+  ]
   include_dirs = [ "//" ]
   ldflags = []
 }

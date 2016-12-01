@@ -1,4 +1,8 @@
 
+config("main_config") {
+  include_dirs = [ "." ]
+}
+
 executable("main") {
   sources = [
     "file.txt",
@@ -18,15 +22,23 @@ executable("main") {
     "chapter3/chapter3_3.h",
     "chapter3/chapter3_4.cpp",
     "chapter3/chapter3_4.h",
+    "chapter8/chapter8.h",
+    "chapter8/chapter8.cpp",
     "chapter12/chapter12.cpp",
     "chapter12/chapter12.h",
     "chapter12/chapter12_1.cpp",
     "chapter12/chapter12_1.h",
     "chapter12/SkBitmap.cpp",
     "chapter12/SkBitmap.h",
+    "chapter14/chapter14.cpp",
+    "chapter14/chapter14.h",
     "chapter15/chapter15.cpp",
     "chapter15/chapter15.h",
   ]
-  include_dirs = ["."]
-  cflags = [ "-std=c++0x", "-g" ]
+  configs += [
+    ":main_config",
+  ]
+  deps = [
+    "//webkit:webkit_static",
+  ]
 }

@@ -20,6 +20,33 @@ const Screen &Screen::Display(std::ostream &out) const {
     return *this;
 }
 
+WindowManager::~WindowManager() {
+    for (std::vector<Screen*>::iterator iter = mScreenVector.begin();
+         iter != mScreenVector.end();
+         ++iter) {
+        delete *iter;
+    }
+    mScreenVector.clear();
+}
+
+void WindowManager::AddScreen(Screen *screen) {
+    Screen *tmp;
+
+    if (screen->id() == INVALID_SCREEN_ID) {
+        screen->id(nextIdInternal());
+    }
+    tmp = findScreen(screen->id());
+    if (tmp == NULL) {
+        mScreenVector.push_back(screen);
+    }
+}
+
+int WindowManager::sNextScreenId = 0;
+
+int WindowManager::nextIdInternal() {
+    return sNextScreenId++;
+}
+
 void chapter12_2_tutorial() {
     Screen screen(10, 10);
     screen.MoveCursor(5, 5).set('*').Display(std::cout);

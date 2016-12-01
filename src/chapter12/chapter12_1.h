@@ -1,10 +1,15 @@
 #ifndef CPRIMER_CHAPTER12_CHAPTER12_1_H
 #define CPRIMER_CHAPTER12_CHAPTER12_1_H
 
+#include <stdlib.h>
+
 #include <string>
 #include <iostream>
+#include <vector>
 
 #include "macros.h"
+
+#define INVALID_SCREEN_ID   -1
 
 namespace chapter12_1 {
 
@@ -40,14 +45,20 @@ private:
     std::string mAddress;
 };
 
+class WindowManager;
+
 /*
  Specify how to use this pointer.
  return this reference for const and non const member function.
 */
 class Screen {
 public:
+    // grant access to nonpublic members to class WindowManager.
+    friend class WindowManager;
+
     Screen(int width, int height)
-    : mContents(width * height, ' '),
+    : mScreenId(INVALID_SCREEN_ID),
+      mContents(width * height, ' '),
       mWidth(width),
       mHeight(height)
     {
@@ -92,17 +103,61 @@ public:
         return *this;
     }
 
+    int id() const {
+        return mScreenId;
+    }
+    void id(int screenId) {
+        DCHECK(mScreenId == INVALID_SCREEN_ID && screenId != INVALID_SCREEN_ID);
+        mScreenId = screenId;
+    }
+
 private:
     bool checkInternal(int x, int y) const {
         return 0 <= x && x < mWidth && 0 <= y && y < mHeight;
     }
 
 private:
+    int mScreenId;
     std::string mContents;
     int mWidth;
     int mHeight;
     int mCursorX;
     int mCursorY;
+};
+
+class WindowManager {
+public:
+    WindowManager() {}
+    ~WindowManager();
+
+    void AddScreen(Screen *screen);
+    void RelocateScreen(int screenId, int cx, int cy) {
+        Screen *screen = findScreen(screenId);
+        if (screen != NULL) {
+            screen->mCursorX = cx;
+            screen->mCursorY = cy;
+        }
+    }
+
+    Screen *findScreen(int screenId) const {
+        Screen *screen = 0;
+        for (std::vector<Screen*>::const_iterator iter = mScreenVector.begin();
+             iter != mScreenVector.end();
+             iter++) {
+            if ((*iter)->id() == screenId) {
+                screen = *iter;
+                break;
+            }
+        }
+        return screen;
+    }
+
+private:
+    static int nextIdInternal();
+    static int sNextScreenId;
+
+private:
+    std::vector<Screen*> mScreenVector;
 };
 
 void chapter12_2_tutorial();
