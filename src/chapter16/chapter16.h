@@ -1,0 +1,10 @@
+#ifndef CPRIMER_CHAPTER16_CHAPTER16_H
+#define CPRIMER_CHAPTER16_CHAPTER16_H
+
+namespace chapter16 {
+
+
+    
+}
+
+#endif // CPRIMER_CHAPTER16_CHAPTER16_H

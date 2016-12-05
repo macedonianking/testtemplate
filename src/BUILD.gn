@@ -22,6 +22,8 @@ executable("main") {
     "chapter3/chapter3_3.h",
     "chapter3/chapter3_4.cpp",
     "chapter3/chapter3_4.h",
+    "chapter5/template_chapter5.h",
+    "chapter5/template_chapter5.cpp",
     "chapter8/chapter8.h",
     "chapter8/chapter8.cpp",
     "chapter12/chapter12.cpp",
@@ -38,6 +40,8 @@ executable("main") {
     "chapter14/chapter14.h",
     "chapter15/chapter15.cpp",
     "chapter15/chapter15.h",
+    "chapter16/chapter16.cpp",
+    "chapter16/chapter16.h",
   ]
   configs += [
     ":main_config",
