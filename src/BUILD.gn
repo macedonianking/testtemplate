@@ -24,6 +24,8 @@ executable("main") {
     "chapter3/chapter3_4.h",
     "chapter5/template_chapter5.h",
     "chapter5/template_chapter5.cpp",
+    "chapter6/template_chapter6.h",
+    "chapter6/template_chapter6.cpp",
     "chapter8/chapter8.h",
     "chapter8/chapter8.cpp",
     "chapter12/chapter12.cpp",

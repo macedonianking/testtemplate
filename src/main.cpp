@@ -1,9 +1,10 @@
 #include <iostream>
 #include <string>
 
-#include "chapter5/template_chapter5.h"
+#include "chapter6/template_chapter6.h"
 
 int main(int argc, char **argv) {
-    chapter5::template_chapter5_1_tutorial();
+    double value = 3.0;
+    chapter6::print_typeinfo(value);
 	return 0;
 }
