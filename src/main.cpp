@@ -5,6 +5,6 @@
 
 int main(int argc, char **argv) {
     double value = 3.0;
-    chapter6::print_typeinfo(value);
+    chapter6_2::print_typeinfo(value);
 	return 0;
 }

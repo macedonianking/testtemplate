@@ -3,14 +3,20 @@
 
 #include <stdint.h>
 #include <cstddef>
+#include <algorithm>
 
 #include "Config.h"
 #include "wtf/HashTableDeletedValueType.h"
+#include "wtf/NullPtr.h"
 
 namespace WTF {
 
 template<typename T>
 class RawPtr {
+private:
+    WTF_DISALLOW_CONSTRUCTOR_FROM_ZERO(RawPtr);
+    WTF_DISALLOW_ASSIGN_FROM_ZERO(RawPtr);
+
 public:
     RawPtr() {
 #if ENABLE(ASSERT)
@@ -50,6 +56,52 @@ public:
         return tmp;
     }
 
+    T* leakRef() {
+        T *ptr = m_ptr;
+        m_ptr = 0;
+        return ptr;
+    }
+
+    T *leakPtr() {
+        T *ptr = m_ptr;
+        m_ptr = 0;
+        return ptr;
+    }
+
+    template<typename U>
+    RawPtr<T> &operator=(U *ptr) {
+        m_ptr = ptr;
+        return *this;
+    }
+
+    template<typename U>
+    RawPtr<T> &operator=(const RawPtr<U> &t) {
+        m_ptr = t.get();
+        return *this;
+    }
+
+    RawPtr<T> &operator=(std::nullptr_t) {
+        m_ptr = 0;
+        return *this;
+    }
+
+    operator T*() const {
+        return m_ptr;
+    }
+    T *operator->() const {
+        return m_ptr;
+    }
+    T &operator*() const {
+        return *m_ptr;
+    }
+    bool operator!() const {
+        return !m_ptr;
+    }
+
+    void swap(RawPtr<T> &o) {
+        std::swap(m_ptr, o.m_ptr);
+    }
+
     static T *hashTableDeletedValue() {
         return reinterpret_cast<T*>(-1);
     }
@@ -58,6 +110,19 @@ private:
     static const uintptr_t  rawPtrZapValue = 0x3a3a3a3a;
 };
 
+template<typename T, typename U>
+inline RawPtr<T> static_pointer_cast(const RawPtr<U> &o) {
+    return RawPtr<T>(static_cast<T*>(o.get()));
 }
+
+template<typename T>
+inline T* getPtr(const RawPtr<T> &t) {
+    return t.get();
+}
+
+}
+
+// Import RawPtr name to transination unit.
+using WTF::RawPtr;
 
 #endif // WEBKIT_SORUCE_WTF_RAWPTR_H

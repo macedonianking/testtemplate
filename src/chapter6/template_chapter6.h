@@ -1,5 +1,5 @@
-#ifndef CPRIMER_CHAPTER5_TEMPLATE_CHAPTER6_H
-#define CPRIMER_CHAPTER5_TEMPLATE_CHAPTER6_H
+#ifndef CPRIMER_CHAPTER6_TEMPLATE_CHAPTER6_H
+#define CPRIMER_CHAPTER6_TEMPLATE_CHAPTER6_H
 
 #include <typeinfo>
 #include <iostream>
@@ -15,4 +15,17 @@ void template_chapter6_1_tutorial();
 
 }
 
-#endif // CPRIMER_CHAPTER5_TEMPLATE_CHAPTER6_H
+namespace chapter6_2 {
+
+template<typename T>
+void print_typeinfo(const T &t);
+
+}
+
+namespace chapter6_3 {
+
+
+
+}
+
+#endif // CPRIMER_CHAPTER6_TEMPLATE_CHAPTER6_H
