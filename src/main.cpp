@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string>
 
-#include "chapter6/template_chapter6.h"
+#include "chapter11/chapter11.h"
+#include "webkit/source/WebKitTest.h"
 
 int main(int argc, char **argv) {
-    double value = 3.0;
-    chapter6_2::print_typeinfo(value);
+    chapter11::chapter11_1_tutorial();
+    WTF::test();
 	return 0;
 }

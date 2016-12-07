@@ -4,15 +4,36 @@
 
 #include "wtf/RefPtr.h"
 #include "wtf/RawPtr.h"
+#include "wtf/PassRefPtr.h"
+#include "wtf/TypeTraits.h"
 #include "Config.h"
 
 using std::string;
 
 namespace WTF {
 
+class A {
+public:
+    void ref() {
+    }
+
+    void deref() {
+    }
+};
+
+class B: public A {
+
+};
+
+void test(const RefPtr<B> &ptr);
+
 void test() {
-    RawPtr<string> rawPtr(nullptr);
-    std::cout << rawPtr.get() << std::endl;
+    RefPtr<B> ptr;
+    test(ptr);
+}
+
+void test(const RefPtr<B> &ptr) {
+    std::cout << ptr << std::endl;
 }
 
 }
