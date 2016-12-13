@@ -1,6 +1,10 @@
 #ifndef CPRIMER_CHAPTER14_CHAPTER14_H
 #define CPRIMER_CHAPTER14_CHAPTER14_H
 
+// static polymorphism
+// dynamic polymorphism
+// generic programming
+
 namespace chapter14 {
 
 class GeoObj {
@@ -9,7 +13,6 @@ public:
     virtual ~GeoObj() {}
 
     virtual void Draw() = 0;
-
     virtual void GetCenter(int *xptr, int *yptr) const = 0;
 };
 
@@ -23,6 +26,8 @@ public:
 private:
     int mLeft, mTop, mRight, mBottom;
 };
+
+void drawGeoObj(GeoObj *obj);
 
 }
 

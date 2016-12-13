@@ -18,6 +18,12 @@ void RectangleGeo::Draw() {
 }
 
 void RectangleGeo::GetCenter(int *px, int *py) const {
+    *px = (mLeft + mRight) >> 1;
+    *py = (mTop + mBottom) >> 1;
+}
+
+void drawGeoObj(GeoObj *obj) {
+    obj->Draw();
 }
 
 }
