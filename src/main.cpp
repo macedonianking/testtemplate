@@ -1,11 +1,11 @@
 #include <iostream>
 #include <string>
 
-#include "chapter12/template_chapter12.h"
+#include "chapter15/template_chapter15_2.h"
 #include "webkit/source/WebKitTest.h"
 
 int main(int argc, char **argv) {
-    chapter12_3::chapter12_3_tutorial();
+    template_chapter15_2::template_chapter15_2_tutorial();
     // WTF::test();
 	return 0;
 }

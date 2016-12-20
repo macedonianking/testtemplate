@@ -5,7 +5,6 @@ config("main_config") {
 
 executable("main") {
   sources = [
-    "file.txt",
     "list.h",
     "macros.h",
     "main.cpp",
@@ -56,6 +55,8 @@ executable("main") {
     "chapter15/chapter15.h",
     "chapter15/template_chapter15.cpp",
     "chapter15/template_chapter15.h",
+    "chapter15/template_chapter15_2.cpp",
+    "chapter15/template_chapter15_2.h",
     "chapter16/chapter16.cpp",
     "chapter16/chapter16.h",
   ]
