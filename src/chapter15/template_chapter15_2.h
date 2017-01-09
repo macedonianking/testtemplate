@@ -142,10 +142,10 @@ public:
 template<typename T1, typename T2>
 struct PromotionImpl<true, true, T1, T2> {
 public:
-    typedef SelectType<
+    typedef typename SelectType<
         IsPointerAssignableFrom<T1, T2>::value,
         T2,
-        T1,
+        T1
     >::type type;
 };
 

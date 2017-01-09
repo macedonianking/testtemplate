@@ -57,8 +57,14 @@ executable("main") {
     "chapter15/template_chapter15.h",
     "chapter15/template_chapter15_2.cpp",
     "chapter15/template_chapter15_2.h",
+    "chapter15/template_chapter15_3.cpp",
+    "chapter15/template_chapter15_3.h",
     "chapter16/chapter16.cpp",
     "chapter16/chapter16.h",
+    "chapter16/template_chapter16_1.cpp",
+    "chapter16/template_chapter16_1.h",
+    "chapter16/template_chapter16_2.cpp",
+    "chapter16/template_chapter16_2.h",
   ]
   configs += [
     ":main_config",
