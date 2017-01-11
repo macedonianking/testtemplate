@@ -1,0 +1,17 @@
+
+config("webkit_config") {
+  defines = [ "WTF_COMPILER_GCC", "OS_WIN" ]
+  include_dirs = [ "." ]
+}
+
+static_library("webkit_static") {
+  sources = [
+    "Config.h",
+    "wtf/RawPtr.h",
+    "wtf/Assertions.cpp",
+    "WebKitTest.cpp",
+  ]
+  public_configs = [ 
+    ":webkit_config", 
+  ]
+}

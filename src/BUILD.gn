@@ -70,6 +70,6 @@ executable("main") {
     ":main_config",
   ]
   deps = [
-    "//webkit:webkit_static",
+    "//webkit/source:webkit_static",
   ]
 }

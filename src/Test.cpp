@@ -1,0 +1,1 @@
+#define PassRefEqual(T1, T2, v1, v2)

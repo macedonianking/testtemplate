@@ -1,13 +1,11 @@
-#ifndef WEBKIT_SOURCE_NULL_PTR_H
-#define WEBKIT_SOURCE_NULL_PTR_H
+#ifndef WTF_NullPtr_h
+#define WTF_NullPtr_h
 
-/**
-* Disallow definion form ClassName t = 0;
-* Disallow assignment from t = 0;
-*/
-#define WTF_DISALLOW_CONSTRUCTOR_FROM_ZERO(ClassName) \
+#define WTF_DISALLOW_CONSTRUCTION_FROM_ZERO(ClassName) \
+private: \
     ClassName(int)
-#define WTF_DISALLOW_ASSIGN_FROM_ZERO(ClassName) \
+#define WTF_DISALLOW_ZERO_ASSIGNMENT(ClassName) \
+private: \
     ClassName &operator=(int)
 
 #endif

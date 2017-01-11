@@ -1,5 +1,5 @@
-#ifndef WEBKIT_SORUCE_WTF_REFPTR_H
-#define WEBKIT_SORUCE_WTF_REFPTR_H
+#ifndef WTF_RefPtr_h
+#define WTF_RefPtr_h
 
 #include <algorithm>
 #include <cstddef>
@@ -11,6 +11,9 @@
 #include "wtf/TypeTraits.h"
 
 namespace WTF {
+
+template<typename>
+class PassRefPtr;
 
 template<typename T>
 class RefPtr {
@@ -40,6 +43,11 @@ public:
         refIfNotNull(m_ptr);
     }
 
+    template<typename U>
+    RefPtr(const PassRefPtr<U> &ref, EnsurePtrConvertibleArgDecl(U, T))
+    : m_ptr(ref.leakRef()) {
+    }
+
     ~RefPtr() {
         derefIfNotNull(m_ptr);
     }
@@ -66,6 +74,12 @@ public:
 
     // clear the reference
     void clear();
+    PassRefPtr<T> release() {
+        PassRefPtr<T> o = adoptRef(m_ptr);
+        m_ptr = 0;
+        return 0;
+    }
+
     T &operator*() const {
         return *m_ptr;
     }
@@ -154,14 +168,18 @@ inline T *getPtr(const RefPtr<T> &ref) {
 }
 
 /**
- * 在程序的构建期间能够取到时间的指针.
+ * 提供的公共的组件，能够取到对应的指针
  */
 template<typename T>
 class RefPtrValuePeeker {
+    WTF_DISALLOW_CONSTRUCTION_FROM_ZERO(RefPtrValuePeeker);
+    WTF_DISALLOW_ZERO_ASSIGNMENT(RefPtrValuePeeker);
+    
 public:
     RefPtrValuePeeker() : m_ptr(0) {}
     RefPtrValuePeeker(std::nullptr_t) : m_ptr(0) {}
     RefPtrValuePeeker(const RefPtr<T> &ref) : m_ptr(ref.get()) {}
+    RefPtrValuePeeker(const PassRefPtr<T> &ref) : m_ptr(ref.get()) {}
 
     operator T*() const {
         return m_ptr;
@@ -172,7 +190,7 @@ private:
 
 }
 
-using WTF::static_pointer_cast;
 using WTF::RefPtr;
+using WTF::static_pointer_cast;
 
 #endif

@@ -1,5 +1,5 @@
-#ifndef WEBKIT_SORUCE_WTF_RAWPTR_H
-#define WEBKIT_SORUCE_WTF_RAWPTR_H
+#ifndef WTF_RawPtr_h
+#define WTF_RawPtr_h
 
 #include <stdint.h>
 #include <cstddef>
@@ -13,9 +13,8 @@ namespace WTF {
 
 template<typename T>
 class RawPtr {
-private:
-    WTF_DISALLOW_CONSTRUCTOR_FROM_ZERO(RawPtr);
-    WTF_DISALLOW_ASSIGN_FROM_ZERO(RawPtr);
+    WTF_DISALLOW_CONSTRUCTION_FROM_ZERO(RawPtr);
+    WTF_DISALLOW_ZERO_ASSIGNMENT(RawPtr);
 
 public:
     RawPtr() {
@@ -106,8 +105,8 @@ public:
         return reinterpret_cast<T*>(-1);
     }
 private:
-    T   *m_ptr;
     static const uintptr_t  rawPtrZapValue = 0x3a3a3a3a;
+    T   *m_ptr;
 };
 
 template<typename T, typename U>

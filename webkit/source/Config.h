@@ -1,8 +1,7 @@
-#ifndef WEBKIT_SOURCE_CONFIG_H
-#define WEBKIT_SOURCE_CONFIG_H
+#ifndef WTF_Config_h
+#define WTF_Config_h
 
-// eg:ENABLE(ASSERT) -> defined(ENABLE_ASSERT) && ENABLE_ASSERT
-// 定义了ENABLE_ASSERT宏并且设置的宏不是0
 #define ENABLE(WTF_FEATURE) (defined ENABLE_##WTF_FEATURE && ENABLE_##WTF_FEATURE)
+#define OS(WTF_FEATURE)     (defined(OS_##WTF_FEATURE) && OS_##WTF_FEATURE)
 
-#endif // WEBKIT_SOURCE_CONFIG_H
+#endif // WTF_Config_h

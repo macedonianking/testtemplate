@@ -1,5 +1,5 @@
-#ifndef WEBKIT_SOURCE_HASHTABLEDELETEDVALUETYPE_H
-#define WEBKIT_SOURCE_HASHTABLEDELETEDVALUETYPE_H
+#ifndef WTF_HashTableDeletedValueType_H
+#define WTF_HashTableDeletedValueType_H
 
 namespace WTF {
 
