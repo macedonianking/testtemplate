@@ -11,6 +11,8 @@
 #include <malloc.h>
 #endif
 
+static WTFCrashHookFunction globleHook = 0;
+
 static void vprintf_stderr_common(const char *format, va_list args) {
     vfprintf(stdout, format, args);
 }
@@ -67,6 +69,16 @@ void WTFReportBacktrace(int framesToShow) {
 
     WTFGetBacktrace(samples, &frames);
     WTFPrintStacktrace(samples, frames);
+}
+
+void WTFSetCrashHook(WTFCrashHookFunction hook) {
+    globleHook = hook;
+}
+
+void WTFInvokeCrashHook() {
+    if (globleHook) {
+        globleHook();
+    }
 }
 
 WTF::FrameToNameScope::FrameToNameScope(void *addr)

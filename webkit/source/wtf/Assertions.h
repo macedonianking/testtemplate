@@ -4,10 +4,20 @@
 #include "Config.h"
 #include "Compiler.h"
 
-#ifndef IMMEDIATE_TRAP
-#define IMMEDIATE_TRAP() \
-((void (*)())0)()
-#endif
+typedef void (*WTFCrashHookFunction)();
+
+void WTFReportAssertionFailure(const char *filename, int line, const char *function, const char *assertion);
+void WTFReportBacktrace(int famesToShow = 31);
+void WTFSetCrashHook(WTFCrashHookFunction);
+void WTFInvokeCrashHook();
+
+#ifndef IMMEDIATE_CRASH
+#if COMPILER(GCC)
+#define IMMEDIATE_CRASH() __builtin_trap()
+#else
+#define IMMEDIATE_CRASH() ((void (*)())0)()
+#endif // COMPILER(GCC)
+#endif // IMMEDIATE_CRASH
 
 #ifndef CRASH
 #define CRASH() \
@@ -15,9 +25,9 @@ do { \
     WTFReportBacktrace(); \
     WTFInvokeCrashHook(); \
     *(int*)0 = 0xbaadbeef; \
-    IMMEDIATE_TRAP(); \
+    IMMEDIATE_CRASH(); \
 } while(0)
-#endif
+#endif // CRASH
 
 #if COMPILER(GCC)
 #define WTF_ATTRIBUTE_PRINTF(formatStringArgument, extraArguments) __attribute__((__fomrat__(printf, formatStringArgument, extraArguments)))
@@ -37,6 +47,22 @@ if (!(assertion)) { \
 #define ASSERT(assertion) 
 #endif
 
+#ifdef ADDRESS_SANTINIZER
+
+#define ASSERT_WITH_SECURITY_IMPLECATION(assertion) \
+do { \
+    if (!(assertion)) { \
+        WTFReportAssertionFailure(__FILE__, __LINE__, WTF_PRETTY_FUNCTION, #assertion); \
+        CRASH(); \
+    } \
+} while(0)
+
+#else
+
+#define ASSERT_WITH_SECURITY_IMPLECATION(assertion) ASSERT(assertion)
+
+#endif // ADDRESS_SANTINIZER
+
 namespace WTF {
 
 class FrameToNameScope {
@@ -53,9 +79,5 @@ private:
 };
 
 }
-
-void WTFReportAssertionFailure(const char *filename, int line, const char *assertion);
-void WTFReportBacktrace();
-void WTFInvokeCrashHook();
 
 #endif

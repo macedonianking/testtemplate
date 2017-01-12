@@ -1,6 +1,10 @@
 
 config("webkit_config") {
-  defines = [ "WTF_COMPILER_GCC", "OS_WIN" ]
+  defines = [ "WTF_COMPILER_GCC", 
+              "OS_WIN", 
+              "ENABLE_ASSERT",  
+              "ADDRESS_SANTINIZER",
+            ]
   include_dirs = [ "." ]
 }
 

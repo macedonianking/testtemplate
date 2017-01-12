@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstddef>
 
+#include "wtf/Assertions.h"
 #include "wtf/RefPtr.h"
 #include "wtf/RawPtr.h"
 #include "wtf/PassRefPtr.h"
@@ -34,6 +35,10 @@ void test() {
 
 void test(const RefPtr<B> &ptr) {
     std::cout << ptr << std::endl;
+}
+
+void test_main() {
+    ASSERT(1);
 }
 
 }
