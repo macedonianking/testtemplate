@@ -3,6 +3,7 @@ config("webkit_config") {
   defines = [ "WTF_COMPILER_GCC", 
               "OS_WIN", 
               "ENABLE_ASSERT",  
+              "ENABLE_SECURITY_ASSERT",
               "ADDRESS_SANTINIZER",
             ]
   include_dirs = [ "." ]
@@ -13,6 +14,7 @@ static_library("webkit_static") {
     "Config.h",
     "wtf/RawPtr.h",
     "wtf/Assertions.cpp",
+    "wtf/Threading.cpp",
     "WebKitTest.cpp",
   ]
   public_configs = [ 

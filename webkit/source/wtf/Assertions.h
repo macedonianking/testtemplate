@@ -49,7 +49,7 @@ if (!(assertion)) { \
 
 #ifdef ADDRESS_SANTINIZER
 
-#define ASSERT_WITH_SECURITY_IMPLECATION(assertion) \
+#define ASSERT_WITH_SECURITY_IMPLICATION(assertion) \
 do { \
     if (!(assertion)) { \
         WTFReportAssertionFailure(__FILE__, __LINE__, WTF_PRETTY_FUNCTION, #assertion); \
@@ -59,7 +59,7 @@ do { \
 
 #else
 
-#define ASSERT_WITH_SECURITY_IMPLECATION(assertion) ASSERT(assertion)
+#define ASSERT_WITH_SECURITY_IMPLICATION(assertion) ASSERT(assertion)
 
 #endif // ADDRESS_SANTINIZER
 

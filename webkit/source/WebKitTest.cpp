@@ -5,6 +5,7 @@
 #include "wtf/Assertions.h"
 #include "wtf/RefPtr.h"
 #include "wtf/RawPtr.h"
+#include <wtf/RefCounted.h>
 #include "wtf/PassRefPtr.h"
 #include "wtf/TypeTraits.h"
 #include "Config.h"
